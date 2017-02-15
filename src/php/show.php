@@ -7,7 +7,8 @@
 include 'lib.php';
 
 // CONFIGS:
-	$f = '../originalContent/sample01/84201.html'; //sample file
+	$f = '../originalContent/sample01/298679.html'; //sample file
+	$useClass = true;  // attribute class of tags	
 	$sliceLen_head = 52;  // the last is "body" pointer
 	$sliceLen_tail = 18;  // tamanho inicial de tail
 
@@ -17,7 +18,7 @@ echo "\n--- Show $sliceLen_head-lines-HEAD and $sliceLen_tail-lines-TAIL of the 
 echo "\n";
 
 $f = "$basedir/$f";
-$pathList = XMLtoc($f,true,true);
+$pathList = XMLtoc($f,true,true,$useClass);
 $head = getSlice($pathList,$sliceLen_head,false);
 $tail = getSlice($pathList,$sliceLen_tail,true);
 

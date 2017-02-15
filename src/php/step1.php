@@ -10,8 +10,9 @@ include 'lib.php';
 // CONFIGS:
 	$originais = '../originalContent/sample01'; 	// original files in UTF-8 XML or HTML
 	$randSampling = true;  // true for random sampling or false  for sequential
+	$useClass = true;  // attribute class of tags
+	$minSample = false;      // enforce minimal sample-length as 2*$sliceLen_max
 	$sliceLen_max = 60;  // tamanho máximo do head ou tail
-	$minSample = false;      // enforce minimal sampling for 2*$sliceLen_max
 	$sliceLen_head = 2;  // tamanho inicial de head
 	$sliceLen_tail = 2;  // tamanho inicial de tail
 	$NCMP = 25;  // numero de amostras, define itens da matriz diagonal de comparação (permuta).
@@ -48,7 +49,7 @@ $sliceLen_max2 = $sliceLen_max*2;
 $allFNames = [];
 
 foreach ($fname_byRnd as $idx=>$f) {
-	$toc = XMLtoc("$dir/$f",true,true);
+	$toc = XMLtoc("$dir/$f",true,true,$useClass);
 	$toc_lines = count($toc);
 	if (!$minSample || $sliceLen_max2<=$toc_lines) {
 		echo "\n-----\tprocessing sample s$n - $f ($toc_lines lines)\t-----";

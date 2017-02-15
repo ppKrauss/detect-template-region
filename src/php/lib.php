@@ -9,7 +9,7 @@ $basedir = dirname(__DIR__);  //  clone root
 	 * @param $sep string item separator.
 	 * @param $reduceWhen string or array, when used is a list of non-root "stop-tags", that reduce the XPath.
 	 */
-	function XMLtoc($dom,$isfile=true,$asarray=false, $sep="\n", $rmIdx=false, $reduceWhen=NULL) {
+	function XMLtoc($dom, $isfile=true, $asarray=false, $useClass=true, $sep="\n", $rmIdx=false, $reduceWhen=NULL) {
 		if (!is_object($dom))
 			$dom = h2dom($dom,$isfile);
 		$toc=array();
@@ -24,6 +24,7 @@ $basedir = dirname(__DIR__);  //  clone root
 		foreach ($dom->getElementsByTagName('*') as $node) {
 			// debug ok print "{$node->nodeType}.{$node->nodeName}, ";
 			$path = $node->getNodePath();
+			if ($useClass && $node->hasAttribute("class")) $path.= ":".$node->getAttribute("class");
 			if ($rmIdx)
 				$path = preg_replace('/\[\d+\]/s', '', $path);
 			if ($reduceWhen) {
